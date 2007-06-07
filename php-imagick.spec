@@ -8,7 +8,7 @@
 Summary:	Provides a wrapper to the Image Magick Library for PHP
 Name:		php-%{modname}
 Version:	2.0.0
-Release:	%mkrel 0.a3.2
+Release:	%mkrel 0.a3.3
 Group:		System/Servers
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
@@ -17,7 +17,7 @@ BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	XFree86-devel
 BuildRequires:	freetype-devel
 BuildRequires:	freetype2-devel
-BuildRequires:	ImageMagick-devel
+BuildRequires:	ImageMagick-devel >= 6.2.4
 BuildRequires:	bzip2-devel
 BuildRequires:	libjbig-devel
 BuildRequires:	lcms-devel
