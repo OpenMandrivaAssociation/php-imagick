@@ -8,7 +8,7 @@
 Summary:	Provides a wrapper to the Image Magick Library for PHP
 Name:		php-%{modname}
 Version:	2.0.0
-Release:	%mkrel 0.a3.3
+Release:	%mkrel 0.a3.4
 Group:		System/Servers
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
@@ -41,6 +41,15 @@ for some hints on how to use it.
 %setup -q -n imagick-%{version}a3
 
 %build
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
+export FFLAGS="%{optflags}"
+
+%if %mdkversion >= 200710
+export CFLAGS="$CFLAGS -fstack-protector"
+export CXXFLAGS="$CXXFLAGS -fstack-protector"
+export FFLAGS="$FFLAGS -fstack-protector"
+%endif
 
 phpize
 %configure2_5x \
