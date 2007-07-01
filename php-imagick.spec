@@ -8,11 +8,11 @@
 Summary:	Provides a wrapper to the Image Magick Library for PHP
 Name:		php-%{modname}
 Version:	2.0.0
-Release:	%mkrel 0.b1.1
+Release:	%mkrel 0.b2.1
 Group:		System/Servers
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
-Source0:	%{modname}-%{version}b1.tar.bz2
+Source0:	%{modname}-%{version}b2.tar.bz2
 BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	XFree86-devel
 BuildRequires:	freetype-devel
@@ -38,7 +38,7 @@ for some hints on how to use it.
 
 %prep
 
-%setup -q -n imagick-%{version}b1
+%setup -q -n imagick-%{version}b2
 
 %build
 export CFLAGS="%{optflags}"
