@@ -8,7 +8,7 @@
 Summary:	Provides a wrapper to the Image Magick Library for PHP
 Name:		php-%{modname}
 Version:	2.0.0
-Release:	%mkrel 0.RC1.2
+Release:	%mkrel 1.RC1.0
 Group:		System/Servers
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
