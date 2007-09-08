@@ -17,7 +17,7 @@ BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	XFree86-devel
 BuildRequires:	freetype-devel
 BuildRequires:	freetype2-devel
-BuildRequires:	ImageMagick-devel >= 6.2.4
+BuildRequires:	ImageMagick-devel >= 6.3.3
 BuildRequires:	bzip2-devel
 BuildRequires:	libjbig-devel
 BuildRequires:	lcms-devel
