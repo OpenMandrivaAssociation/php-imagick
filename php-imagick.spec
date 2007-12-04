@@ -14,7 +14,7 @@ License:	PHP License
 URL:		http://pecl.php.net/package/imagick
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
 BuildRequires:  php-devel >= 3:5.2.0
-BuildRequires:	XFree86-devel
+BuildRequires:	X11-devel
 BuildRequires:	freetype-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	ImageMagick-devel >= 6.3.2
