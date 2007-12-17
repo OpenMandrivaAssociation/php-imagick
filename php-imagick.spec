@@ -27,7 +27,6 @@ Requires:	ImageMagick
 Requires:	freetype
 Requires:	freetype2
 Epoch:		1
-BuildRoot:	%{_tmppath}/%{name}-root
 
 %description
 This is a dynamic shared object (DSO) that adds Imagick support to PHP.
