@@ -5,46 +5,49 @@
 %define inifile 55_%{modname}.ini
 %define mod_src %{modname}.c
 
-Summary:	Provides a wrapper to the Image Magick Library for PHP
+Summary:	Provides a wrapper to the ImageMagick library for PHP
 Name:		php-%{modname}
-Version:	2.0.1
-Release:	%mkrel 2
-Group:		System/Servers
+Version:	2.1.0
+Release:	%mkrel 0.RC2.1
+Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
-Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
+Source0:	http://pecl.php.net/get/%{modname}-%{version}RC2.tgz
 BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	X11-devel
 BuildRequires:	freetype-devel
 BuildRequires:	freetype2-devel
-BuildRequires:	ImageMagick-devel >= 6.3.2
+BuildRequires:	imagemagick-devel >= 6.3.2
 BuildRequires:	bzip2-devel
 BuildRequires:	libjbig-devel
 BuildRequires:	lcms-devel
 BuildRequires:	zlib-devel >= 1.1.4
 BuildRequires:	chrpath
-Requires:	ImageMagick
+Requires:	imagemagick >= 6.3.2
 Requires:	freetype
 Requires:	freetype2
 Epoch:		1
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-This is a dynamic shared object (DSO) that adds Imagick support to PHP.
+Imagick is a native php extension to create and modify images using the
+ImageMagick API.
 
 imagick is a native php-extension. See the examples in the
-%{_docdir}/%{name}-%{version}/examples directory
-for some hints on how to use it. 
+%{_docdir}/%{name}/examples directory for some hints on
+how to use it.
 
 %prep
 
-%setup -q -n imagick-%{version}
+%setup -q -n imagick-%{version}RC2
+[ "../package.xml" != "/" ] && mv -f ../package.xml .
 
 %build
 %serverbuild
 
 phpize
-%configure2_5x \
-    --with-imagick
+%configure2_5x --with-libdir=%{_lib} \
+    --with-%{modname}=shared,%{_prefix}
 
 %make
 mv modules/*.so .
@@ -82,7 +85,6 @@ fi
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-[ "../package.xml" != "/" ] && rm -f ../package.xml
 
 %files 
 %defattr(-,root,root)
