@@ -8,22 +8,22 @@
 Summary:	Provides a wrapper to the ImageMagick library for PHP
 Name:		php-%{modname}
 Version:	2.1.0
-Release:	%mkrel 0.RC3.2
+Release:	%mkrel 1
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
-Source0:	http://pecl.php.net/get/%{modname}-%{version}RC3.tgz
+Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
+Patch0:		imagick-imagemagick-6.3.8.5.diff
 BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	X11-devel
 BuildRequires:	freetype-devel
 BuildRequires:	freetype2-devel
-BuildRequires:	imagemagick-devel >= 6.3.2
+BuildRequires:	imagemagick-devel >= 6.3.8
 BuildRequires:	bzip2-devel
 BuildRequires:	libjbig-devel
 BuildRequires:	lcms-devel
 BuildRequires:	zlib-devel >= 1.1.4
-BuildRequires:	chrpath
-Requires:	imagemagick >= 6.3.2
+Requires:	imagemagick >= 6.3.8
 Requires:	freetype
 Requires:	freetype2
 Epoch:		1
@@ -39,8 +39,13 @@ how to use it.
 
 %prep
 
-%setup -q -n imagick-%{version}RC3
+%setup -q -n imagick-%{version}
 [ "../package.xml" != "/" ] && mv -f ../package.xml .
+
+%patch0
+
+# lib64 fixes
+perl -pi -e "s|/lib\b|/%{_lib}|g" config.m4
 
 %build
 %serverbuild
@@ -51,7 +56,6 @@ phpize
 
 %make
 mv modules/*.so .
-chrpath -d %{soname}
 
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot} 
@@ -59,7 +63,7 @@ chrpath -d %{soname}
 install -d %{buildroot}%{_libdir}/php/extensions
 install -d %{buildroot}%{_sysconfdir}/php.d
 
-install -m755 %{soname} %{buildroot}%{_libdir}/php/extensions/
+install -m0755 %{soname} %{buildroot}%{_libdir}/php/extensions/
 
 cat > README.%{modname} <<EOF
 The %{name} package contains a dynamic shared object (DSO) for PHP. 
@@ -69,6 +73,9 @@ EOF
 
 cat > %{buildroot}%{_sysconfdir}/php.d/%{inifile} << EOF
 extension = %{soname}
+
+[imagick]
+imagick.locale_fix = 0
 EOF
 
 %post
