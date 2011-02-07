@@ -8,20 +8,13 @@
 Summary:	Provides a wrapper to the ImageMagick library for PHP
 Name:		php-%{modname}
 Version:	3.0.1
-Release:	%mkrel 4
+Release:	%mkrel 5
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
 BuildRequires:  php-devel >= 3:5.2.0
-BuildRequires:	X11-devel
-BuildRequires:	freetype-devel
-BuildRequires:	freetype2-devel
 BuildRequires:	imagemagick-devel >= 6.3.8
-BuildRequires:	bzip2-devel
-BuildRequires:	libjbig-devel
-BuildRequires:	lcms-devel
-BuildRequires:	zlib-devel >= 1.1.4
 Requires:	imagemagick >= 6.3.8
 Requires:	freetype
 Requires:	freetype2
