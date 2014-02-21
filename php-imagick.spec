@@ -7,19 +7,18 @@
 
 Summary:	Provides a wrapper to the ImageMagick library for PHP
 Name:		php-%{modname}
-Version:	3.1.0
-Release:	%mkrel 0.0.RC2.1
+Version:	3.1.2
+Release:	1
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
-Source0:	http://pecl.php.net/get/%{modname}-%{version}RC2.tgz
+Source0:	http://pecl.php.net/get/imagick-%{version}.tgz
 BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	imagemagick-devel >= 6.3.8
 Requires:	imagemagick >= 6.3.8
 Requires:	freetype
 Requires:	freetype2
 Epoch:		1
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Imagick is a native php extension to create and modify images using the
@@ -48,7 +47,6 @@ phpize
 mv modules/*.so .
 
 %install
-rm -rf %{buildroot} 
 
 install -d %{buildroot}%{_libdir}/php/extensions
 install -d %{buildroot}%{_sysconfdir}/php.d
@@ -81,10 +79,8 @@ if [ "$1" = "0" ]; then
 fi
 
 %clean
-rm -rf %{buildroot}
 
 %files 
-%defattr(-,root,root)
 %doc examples CREDITS INSTALL README*
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/php.d/%{inifile}
 %attr(0755,root,root) %{_libdir}/php/extensions/%{soname}
@@ -439,4 +435,5 @@ rm -rf %{buildroot}
 - 0.9.9
 - fix url
 - built for php 4.3.6
+
 
