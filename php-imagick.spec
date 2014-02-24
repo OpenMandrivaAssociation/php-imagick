@@ -30,7 +30,7 @@ how to use it.
 
 %prep
 
-%setup -q -n imagick-%{version}RC2
+%setup -qn %{modname}-%{version}
 [ "../package.xml" != "/" ] && mv -f ../package.xml .
 
 # lib64 fixes
