@@ -17,7 +17,6 @@ BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	imagemagick-devel >= 6.3.8
 Requires:	imagemagick >= 6.3.8
 Requires:	freetype
-Requires:	freetype2
 Epoch:		1
 
 %description
