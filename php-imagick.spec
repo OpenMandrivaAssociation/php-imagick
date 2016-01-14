@@ -4,12 +4,12 @@
 %define soname %{modname}.so
 %define inifile 55_%{modname}.ini
 %define mod_src %{modname}.c
-%define beta RC2
+%define beta %{nil}
 
 Summary:	Provides a wrapper to the ImageMagick library for PHP
 Name:		php-%{modname}
 Version:	3.3.0
-Release:	0.%beta.1
+Release:	1
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
