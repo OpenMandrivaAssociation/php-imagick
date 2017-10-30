@@ -9,7 +9,7 @@
 Summary:	Provides a wrapper to the ImageMagick library for PHP
 Name:		php-%{modname}
 Version:	3.4.3
-Release:	1
+Release:	2
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/imagick
@@ -54,7 +54,7 @@ install -d %{buildroot}%{_sysconfdir}/php.d
 install -m0755 %{soname} %{buildroot}%{_libdir}/php/extensions/
 
 cat > README.%{modname} <<EOF
-The %{name} package contains a dynamic shared object (DSO) for PHP. 
+The %{name} package contains a dynamic shared object (DSO) for PHP.
 To activate it, make sure a file /etc/php.d/%{inifile} is present and
 contains the line 'extension = %{soname}'.
 EOF
@@ -78,7 +78,7 @@ if [ "$1" = "0" ]; then
     fi
 fi
 
-%files 
+%files
 %doc examples CREDITS README*
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/php.d/%{inifile}
 %attr(0755,root,root) %{_libdir}/php/extensions/%{soname}
