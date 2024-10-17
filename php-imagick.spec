@@ -12,7 +12,7 @@ Version:	3.4.3
 Release:	3
 Group:		Development/PHP
 License:	PHP License
-URL:		http://pecl.php.net/package/imagick
+URL:		https://pecl.php.net/package/imagick
 Source0:	http://pecl.php.net/get/imagick-%{version}%{beta}.tgz
 BuildRequires:  php-devel >= 3:5.2.0
 BuildRequires:	imagemagick-devel >= 6.3.8
