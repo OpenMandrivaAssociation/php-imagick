@@ -1,29 +1,28 @@
 %define realname Imagick
 %define modname imagick
-%define dirname %{modname}
 %define soname %{modname}.so
 %define inifile 55_%{modname}.ini
 %define mod_src %{modname}.c
 %define beta %{nil}
+# Allow zend_* symbol references
+%define _disable_ld_no_undefined 1
 
 Summary:	Provides a wrapper to the ImageMagick library for PHP
 Name:		php-%{modname}
-Version:	3.4.3
-Release:	3
+Version:	3.8.1
+Release:	1
 Group:		Development/PHP
 License:	PHP License
 URL:		https://pecl.php.net/package/imagick
 Source0:	http://pecl.php.net/get/imagick-%{version}%{beta}.tgz
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:  php-devel >= 3:5.2.0
-BuildRequires:	imagemagick-devel >= 6.3.8
-Requires:	imagemagick >= 6.3.8
+BuildRequires:	imagemagick-devel >= 7.0.0
+Requires:	imagemagick >= 7.0.0
 Requires:	freetype
-Epoch:		1
 
 %description
 Imagick is a native php extension to create and modify images using the
@@ -45,18 +44,16 @@ perl -pi -e "s|/lib\b|/%{_lib}|g" config.m4
 %serverbuild
 
 phpize
-%configure2_5x --with-libdir=%{_lib} \
+%configure --with-libdir=%{_lib} \
     --with-%{modname}=shared,%{_prefix}
 
-%make
-mv modules/*.so .
+%make_build LIBTOOL=rclibtool
 
 %install
+%make_install LIBTOOL=rclibtool INSTALL_ROOT=%{buildroot}
 
 install -d %{buildroot}%{_libdir}/php/extensions
 install -d %{buildroot}%{_sysconfdir}/php.d
-
-install -m0755 %{soname} %{buildroot}%{_libdir}/php/extensions/
 
 cat > README.%{modname} <<EOF
 The %{name} package contains a dynamic shared object (DSO) for PHP.
@@ -71,17 +68,9 @@ extension = %{soname}
 imagick.locale_fix = 0
 EOF
 
-%post
-if [ -f /var/lock/subsys/httpd ]; then
-    %{_initrddir}/httpd restart >/dev/null || :
-fi
-
-%postun
-if [ "$1" = "0" ]; then
-    if [ -f /var/lock/subsys/httpd ]; then
-	%{_initrddir}/httpd restart >/dev/null || :
-    fi
-fi
+# We don't need the header, there are no other modules
+# linking against this one
+rm -rf %{buildroot}%{_includedir}
 
 %files
 %doc examples CREDITS README*
